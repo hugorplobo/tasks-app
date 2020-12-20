@@ -1,9 +1,11 @@
 .fixed-tasks {
-    margin-top: 20px;
     padding: 10px;
     font-size: .9rem;
     font-family: "Nunito";
     color: white;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
 }
 
 label {
@@ -13,11 +15,21 @@ label {
 .fixed-task {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
-.fa-ellipsis-h {
+.more-icon {
     align-self: center;
     cursor: pointer;
+    width: 20px;
+    height: 20px;
+    fill: var(--light-gray);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.more-icon:hover {
+    opacity: 1;
 }
 
 .task-texts {
@@ -28,15 +40,83 @@ label {
 
 .task-texts .task-label {
     font-weight: bold;
+    font-size: 15px;
+    user-select: none;
 }
 
 .task-texts .task-description {
     color: var(--light-gray);
+    margin-top: 10px;
 }
 
 .task-check {
-    align-self: baseline;
-    margin-top: 5px;
     cursor: pointer;
-    outline: none;
+    margin: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    color:#363839;
+    border: 1px solid var(--dark-gray);
+    border-radius: 4px;
+    appearance: none;
+    outline: 0;
+    transition: background-color 175ms;
+    position: relative;
+    background-color: var(--primary-gray);
+}
+
+.task-check::before {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 14px;
+    border-style: solid;
+    border-color: white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.task-check:checked {
+    color: white;
+    border-color: var(--light-pink);
+    background-color: var(--light-pink);
+}
+
+.task-check:checked::before {
+    opacity: 1;
+}
+
+.task-check:checked ~ .task-texts .task-label::before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.task-label::before {
+    position: absolute;
+    content: attr(data-content);
+    color: #9c9e9f;
+    clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    text-decoration-color: #363839;
+    transition: clip-path 200ms;
+}
+
+.pin-icon {
+    width: 15px;
+    height: 15px;
+    margin: 0 10px 0 10px;
+    fill: var(--light-pink);
+}
+
+.fixed-tasks:last-child::after {
+    content: '';
+    display: block;
+    width: 35rem;
+    height: 2px;
+    background-color: var(--dark-gray);
+    margin-top: 20px;
+    align-self: center;
 }
