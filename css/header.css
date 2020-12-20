@@ -1,0 +1,45 @@
+.header li {
+    display: inline-flex;
+    margin: 0 20px;
+    padding: 10px 6px;
+    cursor: pointer;
+    position: relative;
+    justify-content: center;
+    color: var(--light-gray);
+}
+
+.header li.active, .header li:hover:not(.active) {
+    color: white;
+}
+
+.header li::after {
+    content: "";
+    width: 0;
+    transition: width 0.2s;
+    position: absolute;
+    display: block;
+    background-color: var(--light-pink);
+    height: 3px;
+    border-radius: 10px;
+    bottom: 0;
+}
+
+.header li.active::after {
+    width: 60px;
+}
+
+.header li:hover:not(.active)::after {
+    width: 60px;
+}
+
+.header {
+    user-select: none;
+    background-color: var(--primary-gray);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Nunito";
+    font-size: 1rem;
+    border-bottom: 1px solid var(--dark-gray);
+}

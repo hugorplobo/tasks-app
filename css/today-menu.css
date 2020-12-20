@@ -1,0 +1,35 @@
+.today-menu {
+    margin: 50px 0;
+    align-self: center;
+    display: flex;
+    color: var(--light-gray);
+}
+
+.fas {
+    font-size: 2rem;
+    opacity: 0.3;
+    margin: 0 50px;
+    align-self: center;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 15px;
+}
+
+.fas:hover {
+    opacity: 0.8;
+}
+
+.today-text {
+    text-align: center;
+    font-family: "Nunito";
+}
+
+.today {
+    font-size: 2.5rem;
+}
+
+.today-description {
+    font-size: 1rem;
+    opacity: 0.3;
+}
+
