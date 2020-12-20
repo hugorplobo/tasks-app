@@ -5,7 +5,7 @@
     color: var(--light-gray);
 }
 
-.fas {
+.fa-chevron-left, .fa-chevron-right {
     font-size: 2rem;
     opacity: 0.3;
     margin: 0 50px;
@@ -15,7 +15,7 @@
     padding: 15px;
 }
 
-.fas:hover {
+.fa-chevron-left:hover, .fa-chevron-right:hover {
     opacity: 0.8;
 }
 

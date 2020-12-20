@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/today-menu.css">
+    <link rel="stylesheet" href="css/main-add.css">
+    <link rel="stylesheet" href="css/main-fixed.css">
 </head>
 <body>
     <div class="app">
@@ -35,7 +37,19 @@
 
         <div class="main">
             <div class="add">
-                <input type="text" name="teste" id="teste">
+                <input type="text" name="teste" id="teste" class="input-add" placeholder="Add a task...">
+                <i class="add-icon fas fa-align-left"></i>
+            </div>
+
+            <div class="fixed-tasks">
+                <div class="task fixed-task">
+                    <input type="checkbox" name="example" id="example" class="task-check">
+                    <div class="task-texts">
+                        <label for="example" class="task-label">Fazer café</label>
+                        <label for="example" class="task-description">Somente um teste</span>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
             </div>
         </div>
     </div>
