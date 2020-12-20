@@ -12,6 +12,14 @@ label {
     cursor: pointer;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+*::before, *::after {
+    box-sizing: border-box;
+}
+
 .fixed-task {
     display: flex;
     justify-content: space-between;
@@ -54,24 +62,23 @@ label {
     margin: 0;
     width: 1.5rem;
     height: 1.5rem;
-    color:#363839;
+    color: #363839;
     border: 1px solid var(--dark-gray);
     border-radius: 4px;
     appearance: none;
     outline: 0;
     transition: background-color 175ms;
-    position: relative;
+    display: flex;
     background-color: var(--primary-gray);
+    justify-content: center;
+
 }
 
 .task-check::before {
-    position: absolute;
-    left: 4px;
-    bottom: 4px;
     content: '';
     display: block;
-    width: 8px;
-    height: 14px;
+    width: .5rem;
+    height: 1rem;
     border-style: solid;
     border-color: white;
     border-width: 0 2px 2px 0;
@@ -89,7 +96,7 @@ label {
     opacity: 1;
 }
 
-.task-check:checked ~ .task-texts .task-label::before {
+.task-check:checked~.task-texts .task-label::before {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
