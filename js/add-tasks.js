@@ -57,7 +57,7 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer) {
     descriptionElement.textContent = taskDescription
 
     const iconElement = document.createElement("img")
-    iconElement.src = "../icons/more.svg"
+    iconElement.src = "icons/more.svg"
     iconElement.classList.add("more-icon")
     iconElement.classList.add("svg")
 
