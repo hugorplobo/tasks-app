@@ -6,12 +6,12 @@
 }
 
 .arrow-icon {
-    opacity: 0.3;
+    opacity: 0.5;
     margin: 0 50px;
     align-self: center;
     cursor: pointer;
     transition: 0.3s;
-    padding: 15px;
+    padding: 5px;
     width: 30px;
     height: 30px;
     fill: var(--light-gray);

@@ -68,10 +68,9 @@ label {
     appearance: none;
     outline: 0;
     transition: background-color 175ms;
-    display: flex;
+    /* display: flex; */
     background-color: var(--primary-gray);
-    justify-content: center;
-
+    /* justify-content: center; */
 }
 
 .task-check::before {
@@ -84,6 +83,7 @@ label {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     opacity: 0;
+    margin: 5% auto auto auto;
 }
 
 .task-check:checked {
