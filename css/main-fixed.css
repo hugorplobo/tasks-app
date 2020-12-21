@@ -1,4 +1,4 @@
-.fixed-tasks {
+.fixed-tasks, .main-tasks {
     padding: 10px;
     font-size: .9rem;
     font-family: "Nunito";
@@ -6,6 +6,7 @@
     width: 30rem;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 label {
@@ -20,7 +21,7 @@ label {
     box-sizing: border-box;
 }
 
-.fixed-task {
+.task {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -68,9 +69,7 @@ label {
     appearance: none;
     outline: 0;
     transition: background-color 175ms;
-    /* display: flex; */
     background-color: var(--primary-gray);
-    /* justify-content: center; */
 }
 
 .task-check::before {
@@ -111,19 +110,21 @@ label {
     transition: clip-path 200ms;
 }
 
-.pin-icon {
+.fixed-task .pin-icon {
     width: 15px;
     height: 15px;
     margin: 0 10px 0 10px;
     fill: var(--light-pink);
 }
 
-.fixed-tasks:last-child::after {
+.fixed-tasks div:last-child::after {
     content: '';
     display: block;
-    width: 35rem;
-    height: 2px;
+    width: 30rem;
+    height: 1px;
     background-color: var(--dark-gray);
-    margin-top: 20px;
-    align-self: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
 }

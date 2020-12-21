@@ -1,7 +1,9 @@
-.app {
-    width: 100vw;
-    height: 100vh;
+html {
     background-color: var(--primary-gray);
+    background-size: cover;
+}
+
+.app {
     display: flex;
     flex-direction: column;
 }
