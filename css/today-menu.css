@@ -12,8 +12,8 @@
     cursor: pointer;
     transition: 0.3s;
     padding: 5px;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     fill: var(--light-gray);
 }
 

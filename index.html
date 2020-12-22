@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="css/today-menu.css">
     <link rel="stylesheet" href="css/main-add.css">
     <link rel="stylesheet" href="css/main-fixed.css">
-    <script src="js/inlineSVG.min.js"></script>
 </head>
 
 <body>
@@ -29,42 +28,42 @@
         </div>
 
         <div class="today-menu">
-            <img class="arrow-icon svg" src="icons/left.svg" />
+            <img class="arrow-icon" src="icons/left.png" />
             <div class="today-text">
                 <h1 class="today">Tuesday</h1>
                 <h6 class="today-description">Mar 23, 2017</h6>
             </div>
-            <img class="arrow-icon svg" src="icons/right.svg" />
+            <img class="arrow-icon" src="icons/right.png" />
         </div>
 
         <div class="main">
             <div class="add">
                 <input type="text" name="input-add" id="input-add" class="input-add" placeholder="Add a task...">
-                <img class="add-icon svg" src="icons/align.svg" />
+                <img class="add-icon" src="icons/align.png" />
             </div>
 
             <div class="fixed-tasks">
                 <div class="task fixed-task">
                     <input type="checkbox" name="example1-fixed" id="example1-fixed" class="task-check">
-                    <img class="pin-icon svg" src="icons/pin.svg" />
+                    <img class="pin-icon" src="icons/pin.png" />
                     <div class="task-texts">
                         <label for="example1-fixed" class="task-label" data-content="Fazer café">
                             Fazer café
                         </label>
                         <label for="example1-fixed" class="task-description">Somente um teste</span>
                     </div>
-                    <img class="more-icon svg" src="icons/more.svg" />
+                    <img class="more-icon" src="icons/more.png" />
                 </div>
                 <div class="task fixed-task">
                     <input type="checkbox" name="example2-fixed" id="example2-fixed" class="task-check">
-                    <img class="pin-icon svg" src="icons/pin.svg" />
+                    <img class="pin-icon" src="icons/pin.png" />
                     <div class="task-texts">
                         <label for="example2-fixed" class="task-label" data-content="Estudar CSS">
                             Estudar CSS
                         </label>
                         <label for="example2-fixed" class="task-description">Outro teste</span>
                     </div>
-                    <img class="more-icon svg" src="icons/more.svg" />
+                    <img class="more-icon" src="icons/more.png" />
                 </div>
             </div>
 
@@ -72,11 +71,6 @@
             </div>
         </div>
     </div>
-    <script>
-        inlineSVG.init({
-            svgSelector: "img.svg"
-        })
-    </script>
     <script src="js/add-tasks.js"></script>
     <script src="js/menu-items-active.js"></script>
 </body>
