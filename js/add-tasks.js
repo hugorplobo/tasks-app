@@ -1,19 +1,4 @@
-const tasks = [
-    {
-        label: "Teste",
-        description: "Só um teste",
-        id: 1,
-        fixed: false,
-        checked: false
-    },
-    {
-        label: "Teste Fixado",
-        description: "",
-        id: 0,
-        fixed: true,
-        checked: false
-    }
-]
+const tasks = getTasks() || []
 
 const tasksContainer = document.querySelector(".main-tasks")
 const fixedTasksContainer = document.querySelector(".fixed-tasks")
@@ -21,15 +6,44 @@ const fixedTasksContainer = document.querySelector(".fixed-tasks")
 const inputElement = document.querySelector("#input-add")
 inputElement.addEventListener('keyup', (event) => {
     if (event.keyCode === 13) {
-        createTaskElement(inputElement.value, "", tasksContainer)
+        addElement(inputElement.value, "", Date.now())
         inputElement.value = ""
     }
 })
 
-function renderElements() {
-    inlineSVG.init({
-        svgSelector: "img.svg"
+renderElements()
+
+function setTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+}
+
+function getTasks() {
+    return JSON.parse(localStorage.getItem("tasks"))
+}
+
+function addElement(taskLabel, taskDescription, id) {
+    tasks.push({
+        label: taskLabel,
+        description: taskDescription,
+        id,
+        fixed: false,
+        checked: false
     })
+
+    setTasks()
+
+    renderElements()
+}
+
+function renderElements() {
+
+    tasksContainer.innerHTML = ''
+
+    for (task in tasks) {
+        console.log(`Rendering ${JSON.stringify(tasks[task])}`)
+        createTaskElement(tasks[task].label, tasks[task].description, tasksContainer)
+    }
+
 }
 
 function createTaskElement(taskLabel, taskDescription, tasksContainer) {
@@ -61,6 +75,11 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer) {
     iconElement.classList.add("more-icon")
     iconElement.classList.add("svg")
 
+    appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, taskElement, tasksContainer)
+
+}
+
+function appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, taskElement, tasksContainer) {
     taskTextsElement.append(labelElement)
     taskTextsElement.append(descriptionElement)
 
@@ -69,15 +88,4 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer) {
     taskElement.append(iconElement)
 
     tasksContainer.append(taskElement)
-
-    tasks.push({
-        label: taskLabel,
-        description: taskDescription,
-        id: inputElement.id,
-        fixed: false,
-        checked: false
-    })
-
-    renderElements()
-
 }
