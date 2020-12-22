@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="css/today-menu.css">
     <link rel="stylesheet" href="css/main-add.css">
     <link rel="stylesheet" href="css/main-fixed.css">
+    <link rel="stylesheet" href="css/tasks-menu.css">
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
 </head>
 
 <body>
@@ -53,6 +55,20 @@
                         <label for="example1-fixed" class="task-description">Somente um teste</span>
                     </div>
                     <img class="more-icon" src="icons/more.png" />
+                    <div class="menu">
+                        <li>
+                            Pin
+                            <img class="icon" src="icons/pin-gray.png" />
+                        </li>
+                        <li>
+                            Add a memo
+                            <img class="icon" src="icons/memo.png" />
+                        </li>
+                        <li>
+                            Delete
+                            <img class="icon" src="icons/trash.png" />
+                        </li>
+                    </div>
                 </div>
                 <div class="task fixed-task">
                     <input type="checkbox" name="example2-fixed" id="example2-fixed" class="task-check">
@@ -64,6 +80,20 @@
                         <label for="example2-fixed" class="task-description">Outro teste</span>
                     </div>
                     <img class="more-icon" src="icons/more.png" />
+                    <div class="menu">
+                        <li>
+                            Pin
+                            <img class="icon" src="icons/pin-gray.png" />
+                        </li>
+                        <li>
+                            Add a memo
+                            <img class="icon" src="icons/memo.png" />
+                        </li>
+                        <li>
+                            Delete
+                            <img class="icon" src="icons/trash.png" />
+                        </li>
+                    </div>
                 </div>
             </div>
 
@@ -71,6 +101,7 @@
             </div>
         </div>
     </div>
+    <script src="js/toggle-menu-task.js"></script>
     <script src="js/add-tasks.js"></script>
     <script src="js/menu-items-active.js"></script>
 </body>

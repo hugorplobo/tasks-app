@@ -32,7 +32,6 @@ label {
     cursor: pointer;
     width: 20px;
     height: 20px;
-    fill: var(--light-gray);
     opacity: 0.5;
     transition: opacity 0.2s;
 }
@@ -114,10 +113,9 @@ label {
     width: 15px;
     height: 15px;
     margin: 0 10px 0 10px;
-    fill: var(--light-pink);
 }
 
-.fixed-tasks div:last-child::after {
+.fixed-tasks div.task:last-child::after {
     content: '';
     display: block;
     width: 30rem;

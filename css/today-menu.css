@@ -14,7 +14,6 @@
     padding: 5px;
     width: 40px;
     height: 40px;
-    fill: var(--light-gray);
 }
 
 .arrow-icon:hover {

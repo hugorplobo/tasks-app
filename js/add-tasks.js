@@ -1,4 +1,4 @@
-const tasks = getTasks() || []
+let tasks = getTasks() || []
 
 const tasksContainer = document.querySelector(".main-tasks")
 const fixedTasksContainer = document.querySelector(".fixed-tasks")
@@ -6,7 +6,7 @@ const fixedTasksContainer = document.querySelector(".fixed-tasks")
 const inputElement = document.querySelector("#input-add")
 inputElement.addEventListener('keyup', (event) => {
     if (event.keyCode === 13) {
-        addElement(inputElement.value, "", Date.now())
+        addElement(inputElement.value, "", uuidv4())
         inputElement.value = ""
     }
 })
@@ -32,7 +32,7 @@ function addElement(taskLabel, taskDescription, id) {
 
     setTasks()
 
-    renderElements()
+    renderElements(id)
 }
 
 function renderElements() {
@@ -41,19 +41,19 @@ function renderElements() {
 
     for (task in tasks) {
         console.log(`Rendering ${JSON.stringify(tasks[task])}`)
-        createTaskElement(tasks[task].label, tasks[task].description, tasksContainer)
+        createTaskElement(tasks[task].label, tasks[task].description, tasksContainer, tasks[task].id)
     }
 
 }
 
-function createTaskElement(taskLabel, taskDescription, tasksContainer) {
+function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
     const taskElement = document.createElement("div")
     taskElement.classList.add("task")
 
     const inputElement = document.createElement("input")
     inputElement.type = "checkbox"
     inputElement.name = taskLabel
-    inputElement.id = Date.now()
+    inputElement.id = id
     inputElement.classList.add("task-check")
 
     const taskTextsElement = document.createElement("div")
@@ -74,17 +74,57 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer) {
     iconElement.src = "icons/more.png"
     iconElement.classList.add("more-icon")
 
-    appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, taskElement, tasksContainer)
+    const menuElement = document.createElement("div")
+    menuElement.classList.add("menu")
+
+    const listPinElement = document.createElement("li")
+    const listPinIcon = document.createElement("img")
+    const listPinText = document.createTextNode("Pin")
+    listPinIcon.src = "icons/pin-gray.png"
+    listPinIcon.classList.add("icon")
+    listPinElement.append(listPinText)
+    listPinElement.append(listPinIcon)
+
+    const listMemoElement = document.createElement("li")
+    const listMemoIcon = document.createElement("img")
+    const listMemoText = document.createTextNode("Add a memo")
+    listMemoIcon.src = "icons/memo.png"
+    listMemoIcon.classList.add("icon")
+    listMemoElement.append(listMemoText)
+    listMemoElement.append(listMemoIcon)
+
+    const listTrashElement = document.createElement("li")
+    const listTrashIcon = document.createElement("img")
+    const listTrashText = document.createTextNode("Delete")
+    listTrashIcon.src = "icons/trash.png"
+    listTrashIcon.classList.add("icon")
+    listTrashElement.append(listTrashText)
+    listTrashElement.append(listTrashIcon)
+
+    menuElement.append(listPinElement, listMemoElement, listTrashElement)
+
+    iconElement.addEventListener("click", () => {
+        menuElement.classList.toggle("active")
+    })
+
+    listTrashElement.addEventListener("click", () => {
+        tasks = tasks.filter(item => item.id !== id)
+        renderElements()
+    })
+
+    appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, menuElement, taskElement, tasksContainer)
 
 }
 
-function appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, taskElement, tasksContainer) {
+function appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, menuElement, taskElement, tasksContainer) {
     taskTextsElement.append(labelElement)
     taskTextsElement.append(descriptionElement)
 
     taskElement.append(inputElement)
     taskElement.append(taskTextsElement)
     taskElement.append(iconElement)
+    console.log(menuElement)
+    taskElement.append(menuElement)
 
     tasksContainer.append(taskElement)
 }
