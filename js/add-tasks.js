@@ -30,31 +30,50 @@ function addElement(taskLabel, taskDescription, id) {
         checked: false
     })
 
-    setTasks()
-
-    renderElements(id)
+    renderElements()
 }
 
 function renderElements() {
 
     tasksContainer.innerHTML = ''
+    fixedTasksContainer.innerHTML = ''
 
     for (task in tasks) {
         console.log(`Rendering ${JSON.stringify(tasks[task])}`)
-        createTaskElement(tasks[task].label, tasks[task].description, tasksContainer, tasks[task].id)
+        if (tasks[task].fixed) {
+            createTaskElement(tasks[task].label, tasks[task].description, fixedTasksContainer, tasks[task].id)
+        } else {
+            createTaskElement(tasks[task].label, tasks[task].description, tasksContainer, tasks[task].id)
+        }
+        
     }
+
+    setTasks()
 
 }
 
 function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
+
     const taskElement = document.createElement("div")
-    taskElement.classList.add("task")
+
+    for (task in tasks) {
+        if (tasks[task].id === id && tasks[task].fixed) {
+            taskElement.classList.add("task", "fixed-task")
+        }
+        else {
+            taskElement.classList.add("task")
+        }
+    }
 
     const inputElement = document.createElement("input")
     inputElement.type = "checkbox"
     inputElement.name = taskLabel
     inputElement.id = id
     inputElement.classList.add("task-check")
+
+    const pinElement = document.createElement("img")
+    pinElement.src = "icons/pin.png"
+    pinElement.classList.add("pin-icon")
 
     const taskTextsElement = document.createElement("div")
     taskTextsElement.classList.add("task-texts")
@@ -108,19 +127,49 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
     })
 
     listTrashElement.addEventListener("click", () => {
-        tasks = tasks.filter(item => item.id !== id)
+        tasks = tasks.filter(item => {
+            return item.id != id
+        })
+        menuElement.classList.toggle("active")
+        console.log(tasks)
         renderElements()
     })
 
+    listPinElement.addEventListener("click", () => {
+        tasks = tasks.map((task) => {
+            if (task.id === inputElement.id) {
+                console.log(taskElement)
+                taskElement.classList.toggle("fixed-task")
+                menuElement.classList.toggle("active")
+                task.fixed = !task.fixed
+                renderElements()
+            }
+
+            return task
+        })
+    })
+
+    for (task in tasks) {
+        if (tasks[task].id === id && tasks[task].fixed) {
+            appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, menuElement, taskElement, tasksContainer, pinElement)
+            return
+        }
+    }
+    
     appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, menuElement, taskElement, tasksContainer)
 
 }
 
-function appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, menuElement, taskElement, tasksContainer) {
+function appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, menuElement, taskElement, tasksContainer, pinIcon=false) {
     taskTextsElement.append(labelElement)
     taskTextsElement.append(descriptionElement)
 
     taskElement.append(inputElement)
+
+    if (pinIcon) {
+        taskElement.append(pinIcon)
+    }
+
     taskElement.append(taskTextsElement)
     taskElement.append(iconElement)
     console.log(menuElement)
