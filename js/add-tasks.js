@@ -41,9 +41,9 @@ function renderElements() {
     for (task in tasks) {
         console.log(`Rendering ${JSON.stringify(tasks[task])}`)
         if (tasks[task].fixed) {
-            createTaskElement(tasks[task].label, tasks[task].description, fixedTasksContainer, tasks[task].id)
+            createTaskElement(tasks[task], fixedTasksContainer)
         } else {
-            createTaskElement(tasks[task].label, tasks[task].description, tasksContainer, tasks[task].id)
+            createTaskElement(tasks[task], tasksContainer)
         }
         
     }
@@ -52,12 +52,14 @@ function renderElements() {
 
 }
 
-function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
+function createTaskElement(taskItem, tasksContainer) {
+
+    // taskLabel, taskDescription, tasksContainer, id
 
     const taskElement = document.createElement("div")
 
     for (task in tasks) {
-        if (tasks[task].id === id && tasks[task].fixed) {
+        if (tasks[task].id === taskItem.id && tasks[task].fixed) {
             taskElement.classList.add("task", "fixed-task")
         }
         else {
@@ -67,9 +69,13 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
 
     const inputElement = document.createElement("input")
     inputElement.type = "checkbox"
-    inputElement.name = taskLabel
-    inputElement.id = id
+    inputElement.name = taskItem.label
+    inputElement.id = taskItem.id
     inputElement.classList.add("task-check")
+
+    if (taskItem.checked) {
+        inputElement.checked = true
+    }
 
     const pinElement = document.createElement("img")
     pinElement.src = "icons/pin.png"
@@ -81,13 +87,13 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
     const labelElement = document.createElement("label")
     labelElement.htmlFor = inputElement.id
     labelElement.classList.add("task-label")
-    labelElement.setAttribute("data-content", taskLabel)
-    labelElement.textContent = taskLabel
+    labelElement.setAttribute("data-content", taskItem.label)
+    labelElement.textContent = taskItem.label
 
     const descriptionElement = document.createElement("label")
     descriptionElement.htmlFor = inputElement.id
     descriptionElement.classList.add("task-description")
-    descriptionElement.textContent = taskDescription
+    descriptionElement.textContent = taskItem.description
 
     const iconElement = document.createElement("img")
     iconElement.src = "icons/more.png"
@@ -128,17 +134,15 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
 
     listTrashElement.addEventListener("click", () => {
         tasks = tasks.filter(item => {
-            return item.id != id
+            return item.id != taskItem.id
         })
         menuElement.classList.toggle("active")
-        console.log(tasks)
         renderElements()
     })
 
     listPinElement.addEventListener("click", () => {
         tasks = tasks.map((task) => {
             if (task.id === inputElement.id) {
-                console.log(taskElement)
                 taskElement.classList.toggle("fixed-task")
                 menuElement.classList.toggle("active")
                 task.fixed = !task.fixed
@@ -149,8 +153,20 @@ function createTaskElement(taskLabel, taskDescription, tasksContainer, id) {
         })
     })
 
+    inputElement.addEventListener("change", () => {
+        tasks = tasks.map((task) => {
+            if (task.id === inputElement.id) {
+                task.checked = !task.checked
+                console.log(task)
+                setTasks()
+            }
+            
+            return task
+        })
+    })
+
     for (task in tasks) {
-        if (tasks[task].id === id && tasks[task].fixed) {
+        if (tasks[task].id === taskItem.id && tasks[task].fixed) {
             appendElement(labelElement, descriptionElement, inputElement, taskTextsElement, iconElement, menuElement, taskElement, tasksContainer, pinElement)
             return
         }
